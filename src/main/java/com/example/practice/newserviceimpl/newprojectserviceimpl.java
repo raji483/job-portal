@@ -6,7 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import com.example.practice.newentity.login;
 import com.example.practice.newentity.newprojectentity;
+import com.example.practice.newpayload.loginpayload;
 import com.example.practice.newpayload.newprojectpayload;
 import com.example.practice.newrepo.newprojectrepo;
 import com.example.practice.newservice.newprojectservice;
@@ -16,6 +18,9 @@ import com.example.practice.utils.CommonQueryAPIUtils;
 public class newprojectserviceimpl implements newprojectservice {
 	@Autowired
 	newprojectrepo repo;
+	
+	@Autowired
+	com.example.practice.newrepo.loginrepo loginrepo;
 
 	@Override
 	public ResponseEntity<?> newdatapost(newprojectpayload reqBody) {
@@ -78,4 +83,34 @@ public class newprojectserviceimpl implements newprojectservice {
 //		}
 //	}
 
+	
+	@Override
+	public ResponseEntity<?> loginpost(loginpayload reqBody) {
+		try {
+			String errorMsg = CommonQueryAPIUtils.validationService(
+					Arrays.asList(reqBody.getEmail(), reqBody.getPassword()),
+					Arrays.asList("email", "password" ));
+			if (errorMsg.length() > 0) {
+				return CommonQueryAPIUtils.fStaticResponse(errorMsg);
+			} else {
+				String password = loginrepo.getpassword(reqBody.getEmail());
+				if (!password .equals(reqBody.getPassword())) {
+					return CommonQueryAPIUtils.manualResponse("02","Incorrect Password");
+				} else {
+					String id = reqBody.getEmail();
+					String pass = reqBody.getPassword();
+
+					login entity = new login();
+					entity.setEmail(id);
+					entity.setPassword(pass);
+					loginrepo.save(entity);
+					return CommonQueryAPIUtils.sResponse("Successfully Login");
+				}
+
+			}
+		} catch (Exception e) {
+			return CommonQueryAPIUtils.fStaticResponse("Internal Server Issue");
+		}
+
+	}
 }

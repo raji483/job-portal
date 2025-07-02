@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.practice.newpayload.loginpayload;
 import com.example.practice.newpayload.newprojectpayload;
 import com.example.practice.newservice.newprojectservice;
 
@@ -19,6 +20,7 @@ public class newprojectcontroller {
 
 	@Autowired
 	newprojectservice service;
+
 	
 	@GetMapping("/raji")
 	String raji() {
@@ -30,6 +32,13 @@ public class newprojectcontroller {
 	public ResponseEntity<?> newdatapost(@RequestBody newprojectpayload reqBody) {
 
 		return service.newdatapost(reqBody);
+	}
+	
+	
+	@PostMapping("/user-login")
+	public ResponseEntity<?> loginpost(@RequestBody loginpayload reqBody) {
+
+		return service.loginpost(reqBody);
 	}
 	
 }
