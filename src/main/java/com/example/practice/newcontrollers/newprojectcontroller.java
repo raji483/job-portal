@@ -3,6 +3,7 @@ package com.example.practice.newcontrollers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -18,6 +19,12 @@ public class newprojectcontroller {
 
 	@Autowired
 	newprojectservice service;
+	
+	@GetMapping("/raji")
+	String raji() {
+		return "hi raji ";
+		
+	}
 	
 	@PostMapping("/user-signin")
 	public ResponseEntity<?> newdatapost(@RequestBody newprojectpayload reqBody) {
