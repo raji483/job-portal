@@ -11,8 +11,7 @@ public interface newprojectrepo extends JpaRepository<newprojectentity, String> 
 	@Query(nativeQuery = true, value = "select COUNT(*) from sign_in_data where email=:emailId")
 	Integer getEmailCount(String emailId);
 	
-	@Query(nativeQuery = true, value = "select password from sign_in_data where email=:email;")
-	String getpassword(String emailId);
+	
 	
 
 }
