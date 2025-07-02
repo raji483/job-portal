@@ -46,7 +46,7 @@ public class newprojectserviceimpl implements newprojectservice {
 
 			}
 		} catch (Exception e) {
-			return CommonQueryAPIUtils.fStaticResponse("internal issue");
+			return CommonQueryAPIUtils.fStaticResponse("Internal Server Issue");
 		}
 
 	}
