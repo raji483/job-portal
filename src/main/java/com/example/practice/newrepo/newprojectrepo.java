@@ -1,5 +1,8 @@
 package com.example.practice.newrepo;
 
+import java.util.List;
+import java.util.Map;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
@@ -12,6 +15,8 @@ public interface newprojectrepo extends JpaRepository<newprojectentity, String> 
 	Integer getEmailCount(String emailId);
 	
 	
+	@Query(nativeQuery = true, value = "select * from Products")
+	List<Map<String, Object>> getproducts();
 	
 
 }

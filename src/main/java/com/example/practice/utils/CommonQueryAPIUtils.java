@@ -388,15 +388,15 @@ public class CommonQueryAPIUtils {
 		return ResponseEntity.ok().body(final_data);
 	}
 
-	public static Map<String, Object> apiService(String apiServiceName, List<Map<String, Object>> repomethod) {
+	public static Map<String, Object> apiService(String apiServiceName,List<Map<String, Object>> map) {
 		Map<String, Object> final_data = new LinkedHashMap<String, Object>();
 		try {
-			if (repomethod.size() > 0) {
+			if (map.size() > 0) {
 				final_data.put("status", true);
 				final_data.put("code", "01");
 				final_data.put("message", "data found");
-				final_data.put(apiServiceName, repomethod);
-				final_data.put("data_count", repomethod.size());
+				final_data.put(apiServiceName, map);
+				final_data.put("data_count", map.size());
 			} else {
 				final_data.put("status", false);
 				final_data.put("code", "03");
