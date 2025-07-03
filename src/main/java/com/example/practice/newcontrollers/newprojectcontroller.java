@@ -15,30 +15,27 @@ import com.example.practice.newservice.newprojectservice;
 @RestController
 @CrossOrigin
 
-
 public class newprojectcontroller {
 
 	@Autowired
 	newprojectservice service;
 
-	
 	@GetMapping("/raji")
 	String raji() {
-		return "hi raji ";
-		
+		return "hi user ";
+
 	}
-	
+
 	@PostMapping("/user-signin")
 	public ResponseEntity<?> newdatapost(@RequestBody newprojectpayload reqBody) {
 
 		return service.newdatapost(reqBody);
 	}
-	
-	
+
 	@PostMapping("/user-login")
 	public ResponseEntity<?> login(@RequestBody loginpayload reqBody) {
 
 		return service.login(reqBody);
 	}
-	
+
 }
