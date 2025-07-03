@@ -18,7 +18,7 @@ import com.example.practice.utils.CommonQueryAPIUtils;
 public class newprojectserviceimpl implements newprojectservice {
 	@Autowired
 	newprojectrepo repo;
-	
+
 	@Autowired
 	com.example.practice.newrepo.loginrepo loginrepo;
 
@@ -27,13 +27,13 @@ public class newprojectserviceimpl implements newprojectservice {
 		try {
 			String errorMsg = CommonQueryAPIUtils.validationService(
 					Arrays.asList(reqBody.getEmail(), reqBody.getPassword(), reqBody.getName(), reqBody.getRole()),
-					Arrays.asList("email", "password", "name","role" ));
+					Arrays.asList("email", "password", "name", "role"));
 			if (errorMsg.length() > 0) {
 				return CommonQueryAPIUtils.fStaticResponse(errorMsg);
 			} else {
 				Integer count = repo.getEmailCount(reqBody.getEmail());
 				if (count > 0) {
-					return CommonQueryAPIUtils.manualResponse("02","Already registered");
+					return CommonQueryAPIUtils.manualResponse("02", "Already registered");
 				} else {
 					Integer rl = reqBody.getRole();
 					String name = reqBody.getName();
@@ -83,33 +83,25 @@ public class newprojectserviceimpl implements newprojectservice {
 //		}
 //	}
 
-	
 	@Override
-	public ResponseEntity<?> loginpost(loginpayload reqBody) {
+	public ResponseEntity<?> login(loginpayload reqBody) {
 		try {
 			String errorMsg = CommonQueryAPIUtils.validationService(
-					Arrays.asList(reqBody.getEmail(), reqBody.getPassword()),
-					Arrays.asList("email", "password" ));
+					Arrays.asList(reqBody.getEmail(),reqBody.getPassword()), Arrays.asList("email", "password"));
 			if (errorMsg.length() > 0) {
 				return CommonQueryAPIUtils.fStaticResponse(errorMsg);
 			} else {
-				String password = loginrepo.getpassword(reqBody.getEmail());
-				if (!password .equals(reqBody.getPassword())) {
-					return CommonQueryAPIUtils.manualResponse("02","Incorrect Password");
-				} else {
-					String id = reqBody.getEmail();
-					String pass = reqBody.getPassword();
-
-					login entity = new login();
-					entity.setEmail(id);
-					entity.setPassword(pass);
-					loginrepo.save(entity);
+				Integer count = loginrepo.getpassword(reqBody.getEmail(), reqBody.getPassword());
+				if (count > 0) {
 					return CommonQueryAPIUtils.sResponse("Successfully Login");
+				} else {
+					return CommonQueryAPIUtils.manualResponse("02", "Invalid credentials!");
 				}
 
 			}
 		} catch (Exception e) {
-			return CommonQueryAPIUtils.fStaticResponse("Internal Server Issue");
+			e.printStackTrace();
+			return CommonQueryAPIUtils.fStaticResponse("Invalid credentials!");
 		}
 
 	}

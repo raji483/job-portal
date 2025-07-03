@@ -36,9 +36,9 @@ public class newprojectcontroller {
 	
 	
 	@PostMapping("/user-login")
-	public ResponseEntity<?> loginpost(@RequestBody loginpayload reqBody) {
+	public ResponseEntity<?> login(@RequestBody loginpayload reqBody) {
 
-		return service.loginpost(reqBody);
+		return service.login(reqBody);
 	}
 	
 }

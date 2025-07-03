@@ -10,7 +10,7 @@ import com.example.practice.newpayload.newprojectpayload;
 public interface newprojectservice {
 	
 	ResponseEntity<?> newdatapost(newprojectpayload reqBody);
-	ResponseEntity<?> loginpost(loginpayload reqBody);
+	ResponseEntity<?> login(loginpayload reqBody);
 	
 	
 	
