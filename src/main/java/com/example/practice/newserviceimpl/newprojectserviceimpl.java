@@ -26,8 +26,8 @@ public class newprojectserviceimpl implements newprojectservice {
 	public ResponseEntity<?> newdatapost(newprojectpayload reqBody) {
 		try {
 			String errorMsg = CommonQueryAPIUtils.validationService(
-					Arrays.asList(reqBody.getEmail(), reqBody.getPassword(), reqBody.getName(), reqBody.getRole()),
-					Arrays.asList("email", "password", "name", "role"));
+					Arrays.asList(reqBody.getEmail(), reqBody.getPassword(), reqBody.getName()),
+					Arrays.asList("email", "password", "name"));
 			if (errorMsg.length() > 0) {
 				return CommonQueryAPIUtils.fStaticResponse(errorMsg);
 			} else {

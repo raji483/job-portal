@@ -11,8 +11,6 @@ public interface newprojectservice {
 	
 	ResponseEntity<?> newdatapost(newprojectpayload reqBody);
 	ResponseEntity<?> login(loginpayload reqBody);
-	
-	
-	
+		
 
 }
