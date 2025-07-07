@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.practice.newpayload.loginpayload;
@@ -47,13 +48,18 @@ public class newprojectcontroller {
 	
 	
 	
-	
-	
 	@GetMapping("/products-data")
 	Map<String, Object> getproducts() {
 		System.err.println("hiiii");
 		
 		return CommonQueryAPIUtils.apiService("data", repo.getproducts());
+
+	}
+	
+	@GetMapping("/best-sellers")
+	Map<String, Object> getbestsellers() {
+		
+		return CommonQueryAPIUtils.apiService("data", repo.getbestsellers());
 
 	}
 

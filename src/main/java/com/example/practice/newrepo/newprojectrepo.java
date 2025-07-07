@@ -18,5 +18,9 @@ public interface newprojectrepo extends JpaRepository<newprojectentity, String> 
 	@Query(nativeQuery = true, value = "select * from Products")
 	List<Map<String, Object>> getproducts();
 	
+	@Query(nativeQuery = true, value = "SELECT * FROM Products WHERE best_seller = 'true' ORDER BY rating DESC;")
+	List<Map<String, Object>> getbestsellers();
+	
+	
 
 }
