@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.practice.newpayload.addresspayload;
 import com.example.practice.newpayload.loginpayload;
 import com.example.practice.newpayload.newprojectpayload;
 import com.example.practice.newrepo.newprojectrepo;
@@ -44,6 +45,12 @@ public class newprojectcontroller {
 	public ResponseEntity<?> login(@RequestBody loginpayload reqBody) {
 
 		return service.login(reqBody);
+	}
+	
+	@PostMapping("/user-address")
+	public ResponseEntity<?> address(@RequestBody addresspayload reqBody) {
+
+		return service.address(reqBody);
 	}
 	
 	

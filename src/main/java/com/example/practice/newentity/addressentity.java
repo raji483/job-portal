@@ -2,6 +2,8 @@ package com.example.practice.newentity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
@@ -10,26 +12,30 @@ import jakarta.persistence.Table;
 
 public class addressentity {
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
-	  private int id;
-	
+	private int id;
+
+	@Column(name = "user_id")
+	private int user_id;
+
 	@Column(name = "address")
-	  private String address;
-	
+	private String address;
+
 	@Column(name = "city")
-	  private String city;
-	
+	private String city;
+
 	@Column(name = "state")
-	  private String state;
-	
+	private String state;
+
 	@Column(name = "pincode")
-	  private String pincode;
-	
+	private String pincode;
+
 	@Column(name = "phone_number")
-	  private String phone_number;
-	
+	private String phone_number;
+
 	@Column(name = "email")
-	  private String email;
+	private String email;
 
 	public int getId() {
 		return id;
@@ -37,6 +43,14 @@ public class addressentity {
 
 	public void setId(int id) {
 		this.id = id;
+	}
+
+	public int getUser_id() {
+		return user_id;
+	}
+
+	public void setUser_id(int user_id) {
+		this.user_id = user_id;
 	}
 
 	public String getAddress() {
@@ -86,9 +100,5 @@ public class addressentity {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	
-	
-	
-	
 
 }

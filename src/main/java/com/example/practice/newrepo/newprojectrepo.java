@@ -11,7 +11,7 @@ import com.example.practice.newentity.newprojectentity;
 @Repository
 public interface newprojectrepo extends JpaRepository<newprojectentity, String> {
 
-	@Query(nativeQuery = true, value = "select COUNT(*) from sign_in_data where email=:emailId")
+	@Query(nativeQuery = true, value = "select COUNT(*) from users where email=:emailId")
 	Integer getEmailCount(String emailId);
 	
 	

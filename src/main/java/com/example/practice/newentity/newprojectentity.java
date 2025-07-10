@@ -6,7 +6,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "sign_in_data")
+@Table(name = "users")
 public class newprojectentity {
 	@Id
 	@Column(name = "email")

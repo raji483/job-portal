@@ -6,10 +6,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import com.example.practice.newentity.addressentity;
 import com.example.practice.newentity.login;
 import com.example.practice.newentity.newprojectentity;
+import com.example.practice.newpayload.addresspayload;
 import com.example.practice.newpayload.loginpayload;
 import com.example.practice.newpayload.newprojectpayload;
+import com.example.practice.newrepo.addressrepo;
 import com.example.practice.newrepo.newprojectrepo;
 import com.example.practice.newservice.newprojectservice;
 import com.example.practice.utils.CommonQueryAPIUtils;
@@ -21,6 +24,9 @@ public class newprojectserviceimpl implements newprojectservice {
 
 	@Autowired
 	com.example.practice.newrepo.loginrepo loginrepo;
+
+	@Autowired
+	addressrepo addrepo;
 
 	@Override
 	public ResponseEntity<?> newdatapost(newprojectpayload reqBody) {
@@ -87,7 +93,7 @@ public class newprojectserviceimpl implements newprojectservice {
 	public ResponseEntity<?> login(loginpayload reqBody) {
 		try {
 			String errorMsg = CommonQueryAPIUtils.validationService(
-					Arrays.asList(reqBody.getEmail(),reqBody.getPassword()), Arrays.asList("email", "password"));
+					Arrays.asList(reqBody.getEmail(), reqBody.getPassword()), Arrays.asList("email", "password"));
 			if (errorMsg.length() > 0) {
 				return CommonQueryAPIUtils.fStaticResponse(errorMsg);
 			} else {
@@ -102,6 +108,42 @@ public class newprojectserviceimpl implements newprojectservice {
 		} catch (Exception e) {
 			e.printStackTrace();
 			return CommonQueryAPIUtils.fStaticResponse("Invalid credentials!");
+		}
+
+	}
+
+	@Override
+	public ResponseEntity<?> address(addresspayload reqBody) {
+		try {
+			String errorMsg = CommonQueryAPIUtils.validationService(
+					Arrays.asList(reqBody.getUserId(), reqBody.getAddress(), reqBody.getCity(), reqBody.getState(), reqBody.getPincode(),
+							reqBody.getPhone_number(), reqBody.getEmail()),
+					Arrays.asList("user_id","address", "city", "state", "pincode", "phone_number", "email"));
+			if (errorMsg.length() > 0) {
+				return CommonQueryAPIUtils.fStaticResponse(errorMsg);
+			} else {
+				Integer uid=reqBody.getUserId();
+				String ad = reqBody.getAddress();
+				String cy = reqBody.getCity();
+				String st = reqBody.getState();
+				String pc = reqBody.getPincode();
+				String pn = reqBody.getPhone_number();
+				String em = reqBody.getEmail();
+
+				addressentity entity = new addressentity();
+				entity.setUser_id(uid);
+				entity.setAddress(ad);
+				entity.setCity(cy);
+				entity.setState(st);
+				entity.setPincode(pc);
+				entity.setPhone_number(pn);
+				entity.setEmail(em);
+				addrepo.save(entity);
+				return CommonQueryAPIUtils.sResponse("Successfully Submitted");
+			}
+
+		} catch (Exception e) {
+			return CommonQueryAPIUtils.fStaticResponse("Internal Server Issue");
 		}
 
 	}

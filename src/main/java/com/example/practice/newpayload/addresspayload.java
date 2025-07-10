@@ -2,12 +2,19 @@ package com.example.practice.newpayload;
 
 public class addresspayload {
 	
+	private Integer  userId;
 	private String  address;
 	private String city;
 	private String state;
 	private String pincode;
 	private String phone_number;
 	private String email;
+	public Integer getUserId() {
+		return userId;
+	}
+	public void setUserId(Integer userId) {
+		this.userId = userId;
+	}
 	public String getAddress() {
 		return address;
 	}
@@ -44,7 +51,6 @@ public class addresspayload {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	
 	
 
 }

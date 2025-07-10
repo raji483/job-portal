@@ -9,6 +9,5 @@ import com.example.practice.newentity.addressentity;
 public interface addressrepo  extends JpaRepository<addressentity, Integer> {
 	
 	
-	
 
 }
